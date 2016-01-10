@@ -87,6 +87,7 @@
 (defun anybar--read-port ()
   (read-number "Port: " anybar-default-port))
 
+;;;###autoload
 (defun anybar-send (command &optional port)
   "Sends the command to the AnyBar instance running on port."
   (interactive (list (read-string "Command: ")
@@ -100,6 +101,7 @@
     (process-send-string conn command)
     (delete-process conn)))
 
+;;;###autoload
 (defun anybar-set (style &optional port)
   "Sets the AnyBar running on the specified port to style. Will
 warn if the style is not valid."
@@ -111,12 +113,14 @@ warn if the style is not valid."
         (anybar-send style port)
       (display-warning "AnyBar" (format "Not a style: %s" style)))))
 
+;;;###autoload
 (defun anybar-quit (&optional port)
   "Quit the AnyBar instance running on the specified port."
   (interactive (list (anybar--read-port)))
   (let ((port (or port anybar-default-port)))
     (anybar-send "quit" port)))
 
+;;;###autoload
 (defun anybar-start (&optional port)
   "Start an instance of AnyBar on the specified port."
   (interactive (list (anybar--read-port)))
