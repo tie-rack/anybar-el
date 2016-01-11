@@ -66,17 +66,20 @@
         "exclamation")
   "The built-in styles for AnyBar.")
 
+(defvar anybar-images nil
+  "Images available to set as the AnyBar style.")
+
 (defun anybar-images-reset ()
   "Sets anybar-images to a list of images available for AnyBar."
   (interactive)
-  (defconst anybar-images
-    (mapcar
-     (lambda (filename)
-       (save-match-data
-         (and (string-match "\\(.*?\\)\\(@2x\\)?.png$" filename)
-              (match-string 1 filename))))
-     (directory-files "~/.AnyBar" nil "\.png$"))
-    "Images available to set as the AnyBar style."))
+  (setq anybar-images
+        (and (file-directory-p "~/.AnyBar")
+             (mapcar
+              (lambda (filename)
+                (save-match-data
+                  (and (string-match "\\(.*?\\)\\(@2x\\)?.png$" filename)
+                       (match-string 1 filename))))
+              (directory-files "~/.AnyBar" nil "\.png$")))))
 
 (anybar-images-reset)
 
