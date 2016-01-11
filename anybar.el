@@ -1,4 +1,4 @@
-;;; anybar.el -- Control AnyBar from Emacs
+;;; anybar.el --- Control AnyBar from Emacs
 
 ;; Copyright (c) 2016  Christopher Shea
 
