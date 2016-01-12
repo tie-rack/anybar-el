@@ -77,7 +77,7 @@
              (mapcar
               (lambda (filename)
                 (save-match-data
-                  (and (string-match "\\(.*?\\)\\(@2x\\)?.png$" filename)
+                  (and (string-match "\\(.*?\\)\\(_alt\\)?\\(@2x\\)?.png$" filename)
                        (match-string 1 filename))))
               (directory-files "~/.AnyBar" nil "\.png$"))))
   (delete-dups anybar-images))
