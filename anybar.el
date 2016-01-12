@@ -79,7 +79,8 @@
                 (save-match-data
                   (and (string-match "\\(.*?\\)\\(@2x\\)?.png$" filename)
                        (match-string 1 filename))))
-              (directory-files "~/.AnyBar" nil "\.png$")))))
+              (directory-files "~/.AnyBar" nil "\.png$"))))
+  (delete-dups anybar-images))
 
 (anybar-images-reset)
 
