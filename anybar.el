@@ -3,7 +3,7 @@
 ;; Copyright (c) 2016  Christopher Shea
 
 ;; Author: Christopher Shea <cmshea@gmail.com>
-;; Version: 0.1.0
+;; Version: 0.1.1
 ;; Keywords: anybar
 
 ;; This Source Code Form is subject to the terms of the Mozilla Public
@@ -44,9 +44,24 @@
 ;;
 ;; These functions may be called interactively.
 ;;
+;; If you have installed AnyBar to a location other than
+;; /Applications/AnyBar.app, you'll need to customize
+;; `anybar-executable-location' so that `anybar-start' may succeed.
+;;
 ;; Enjoy!
 
 ;;; Code:
+
+(defgroup anybar nil
+  "Control AnyBar from Emacs"
+  :group 'external
+  :link '(url-link "https://github.com/tie-rack/anybar-el"))
+
+(defcustom anybar-executable-location
+  "/Applications/AnyBar.app"
+  "The location of the AnyBar.app"
+  :type 'string
+  :safe #'stringp)
 
 (defconst anybar-default-port
   1738
@@ -129,8 +144,9 @@ warn if the style is not valid."
   "Start an instance of AnyBar on the specified port."
   (interactive (list (anybar--read-port)))
   (let* ((port (or port anybar-default-port))
-         (command (format "ANYBAR_PORT=%d open -n ~/Applications/AnyBar.app"
-                          port)))
+         (command (format "ANYBAR_PORT=%d open -n %s"
+                          port
+                          anybar-executable-location)))
     (shell-command command)))
 
 (provide 'anybar)
